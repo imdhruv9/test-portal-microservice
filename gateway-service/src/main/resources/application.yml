@@ -13,5 +13,23 @@ spring:
           predicates:
             - Path=/users/**
 
+        - id: auth-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/auth/**
 
+        - id: exam-service-exams
+          uri: http://localhost:8082
+          predicates:
+            - Path=/exams/**
+
+        - id: exam-service-questions
+          uri: http://localhost:8082
+          predicates:
+            - Path=/questions/**
+
+        - id: exam-service-topics
+          uri: http://localhost:8082
+          predicates:
+            - Path=/topics/**
 

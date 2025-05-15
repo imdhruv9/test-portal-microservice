@@ -125,4 +125,15 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encodedNewPassword);
         userRepository.save(user);
     }
+    @Override
+    public CredResponseDto getUserByUsername(String username){
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(()-> new UserNotFoundException("No user found with this username"));
+        String role = user.getRole().toString();
+        return CredResponseDto.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .role(role)
+                .build();
+    }
 }

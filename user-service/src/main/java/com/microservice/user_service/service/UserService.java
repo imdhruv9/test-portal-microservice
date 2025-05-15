@@ -13,4 +13,6 @@ public interface UserService {
     void deleteUserById(Long id);
 
     void updatePassword(PasswordUpdateDto passwordUpdateDto);
+
+    CredResponseDto getUserByUsername(String username);
 }

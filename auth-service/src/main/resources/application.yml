@@ -1,0 +1,7 @@
+server:
+  port: 8083
+
+logging:
+  level:
+    org.springframework.boot.web: INFO
+    org.springframework.boot.context: INFO

@@ -1,0 +1,1800 @@
+{
+	"info": {
+		"_postman_id": "5131e24d-3e8b-42b0-a444-7092cd62b96e",
+		"name": "test-portal-microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42457378"
+	},
+	"item": [
+		{
+			"name": "user-service",
+			"item": [
+				{
+					"name": "localhost:8080/users/register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 409', function () {",
+									"    pm.expect(pm.response.code).to.equal(409);",
+									"})",
+									"",
+									"pm.test('Content-Type header is application/json', function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"})",
+									"",
+									"pm.test('Response has the required fields', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('timestamp');",
+									"    pm.expect(responseData).to.have.property('status');",
+									"    pm.expect(responseData).to.have.property('error');",
+									"    pm.expect(responseData).to.have.property('message');",
+									"    pm.expect(responseData).to.have.property('path');",
+									"})",
+									"",
+									"pm.test('Error message is not empty', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.error).to.exist.and.to.not.be.empty;",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Amit\",\r\n  \"lastName\": \"Verma\",\r\n  \"username\": \"amit.verma\",\r\n  \"email\": \"amit.verma@example.com\",\r\n  \"password\": \"Amit@2025Hero\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8080/users/register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Amit\",\r\n  \"lastName\": \"Verma\",\r\n  \"username\": \"amit.verma\",\r\n  \"email\": \"amit.verma@example.com\",\r\n  \"password\": \"Amit@2025Hero\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 07:49:09 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"amit.verma\",\n    \"email\": \"amit.verma@example.com\"\n}"
+						}
+					]
+				},
+				{
+					"name": "fetch user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3MjEwMjM4fQ.ken4ZlxGnx_o2wuAtLh4Lx-TPb6fxWwqQK8TnbbjX_4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "fetch user by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/users/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 07:57:23 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Virat Kohli\",\n    \"username\": \"virat\",\n    \"email\": \"virat.kohli@example.com\",\n    \"createdAt\": \"2025-05-14\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/users/register/admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 409', function () {",
+									"    pm.expect(pm.response.code).to.equal(409);",
+									"})",
+									"",
+									"pm.test('Content type is application/json', function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"})",
+									"",
+									"pm.test('Response has the required fields', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('timestamp');",
+									"    pm.expect(responseData).to.have.property('status');",
+									"    pm.expect(responseData).to.have.property('error');",
+									"    pm.expect(responseData).to.have.property('message');",
+									"    pm.expect(responseData).to.have.property('path');",
+									"})",
+									"",
+									"pm.test('Error message is non-empty', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.error).to.exist.and.to.have.lengthOf.at.least(1, 'Error message should not be empty');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Virat\",\r\n  \"lastName\": \"Kohli\",\r\n  \"username\": \"virat\",\r\n  \"email\": \"virat.kohli@example.com\",\r\n  \"password\": \"virat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/register/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8080/users/register/admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Virat\",\r\n  \"lastName\": \"Kohli\",\r\n  \"username\": \"virat\",\r\n  \"email\": \"virat.kohli@example.com\",\r\n  \"password\": \"virat\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/register/admin",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"register",
+										"admin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 07:53:06 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"virat\",\n    \"email\": \"virat.kohli@example.com\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3MjEwMjM4fQ.ken4ZlxGnx_o2wuAtLh4Lx-TPb6fxWwqQK8TnbbjX_4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n  \"firstName\": \"Amit\",\r\n  \"lastName\": \"singh\",\r\n  \"username\": \"amit.verma\",\r\n  \"email\": \"amit.verma@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8080/users",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":1,\r\n  \"firstName\": \"Amit\",\r\n  \"lastName\": \"singh\",\r\n  \"username\": \"amit.verma\",\r\n  \"email\": \"amit.verma@example.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 08:01:37 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Amit singh\",\n    \"username\": \"amit.verma\",\n    \"email\": \"amit.verma@example.com\",\n    \"createdAt\": \"2025-05-14\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/users/3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3MjEwMjM4fQ.ken4ZlxGnx_o2wuAtLh4Lx-TPb6fxWwqQK8TnbbjX_4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/users/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/users/password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3MjEwMjM4fQ.ken4ZlxGnx_o2wuAtLh4Lx-TPb6fxWwqQK8TnbbjX_4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"virat\",\r\n    \"oldPassword\":\"virat\",\r\n    \"newPassword\":\"newvirat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/password",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8080/users/password",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"virat\",\r\n    \"oldPassword\":\"virat\",\r\n    \"newPassword\":\"newvirat\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/users/password",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"password"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 08:09:45 GMT"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "exam-service",
+			"item": [
+				{
+					"name": "topic",
+					"item": [
+						{
+							"name": "localhost:8080/topics",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzIzMjIsImV4cCI6MTc0NzE3MzIyMn0.BQTp1XyMJBIPwNJ1IkM1ksQTjek-EDYIjDHInYB1_JQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"userId\":1,\r\n    \"name\":\"node\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/topics",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"topics"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "question",
+					"item": [
+						{
+							"name": "localhost:8080/questions/csv",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIxMDM5OSwiZXhwIjoxNzQ3MjExMjk5fQ.f7MKOE5dtsX7s--ofwgcx6m4kpig8Gwe9QqcHHHve2M",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/dhruv/Desktop/newquestiion25.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8080/questions/csv",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"csv"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/questions/csv",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/C:/Users/dhruv/Desktop/newquestiion25.csv"
+												}
+											]
+										},
+										"url": {
+											"raw": "localhost:8080/questions/csv",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"questions",
+												"csv"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 21:44:17 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "Question uploaded Successfully via csv file"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/questions/excel",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzIzMjIsImV4cCI6MTc0NzE3MzIyMn0.BQTp1XyMJBIPwNJ1IkM1ksQTjek-EDYIjDHInYB1_JQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/dhruv/Downloads/sample_java_questions.xlsx"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8080/questions/excel",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"excel"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/questions/excel",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/C:/Users/dhruv/Downloads/sample_java_questions.xlsx"
+												}
+											]
+										},
+										"url": {
+											"raw": "localhost:8080/questions/excel",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"questions",
+												"excel"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "45"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 21:47:20 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "Question uploaded successfully via excel file"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/questions/bulk",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIxODg5NiwiZXhwIjoxNzQ3MjIyNDk2fQ.4Ki7xxYa_Ok7kt0x9xfZumLh5HdTy3rIWhTPA24YArw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"questions\": [\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is not a primitive data type in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"String\", \"correct\": true },\r\n        { \"text\": \"int\", \"correct\": false },\r\n        { \"text\": \"boolean\", \"correct\": false },\r\n        { \"text\": \"char\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is used to allocate memory for an object?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"new\", \"correct\": true },\r\n        { \"text\": \"alloc\", \"correct\": false },\r\n        { \"text\": \"malloc\", \"correct\": false },\r\n        { \"text\": \"object\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to inherit a class in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"extends\", \"correct\": true },\r\n        { \"text\": \"implements\", \"correct\": false },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"super\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"What is the default value of a boolean variable in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"false\", \"correct\": true },\r\n        { \"text\": \"true\", \"correct\": false },\r\n        { \"text\": \"0\", \"correct\": false },\r\n        { \"text\": \"null\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which access modifier makes a member visible only within its own class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"private\", \"correct\": true },\r\n        { \"text\": \"protected\", \"correct\": false },\r\n        { \"text\": \"public\", \"correct\": false },\r\n        { \"text\": \"default\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which loop is guaranteed to execute at least once?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"do-while\", \"correct\": true },\r\n        { \"text\": \"while\", \"correct\": false },\r\n        { \"text\": \"for\", \"correct\": false },\r\n        { \"text\": \"foreach\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is a valid keyword in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"interface\", \"correct\": true },\r\n        { \"text\": \"unsigned\", \"correct\": false },\r\n        { \"text\": \"typeof\", \"correct\": false },\r\n        { \"text\": \"def\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to define a constant variable?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"final\", \"correct\": true },\r\n        { \"text\": \"const\", \"correct\": false },\r\n        { \"text\": \"static\", \"correct\": false },\r\n        { \"text\": \"immutable\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which collection class allows you to access elements by key?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"HashMap\", \"correct\": true },\r\n        { \"text\": \"ArrayList\", \"correct\": false },\r\n        { \"text\": \"LinkedList\", \"correct\": false },\r\n        { \"text\": \"Vector\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which package contains the Scanner class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"java.util\", \"correct\": true },\r\n        { \"text\": \"java.io\", \"correct\": false },\r\n        { \"text\": \"java.net\", \"correct\": false },\r\n        { \"text\": \"java.lang\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which exception is thrown when a program divides by zero?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"ArithmeticException\", \"correct\": true },\r\n        { \"text\": \"NullPointerException\", \"correct\": false },\r\n        { \"text\": \"ClassCastException\", \"correct\": false },\r\n        { \"text\": \"IOException\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to create an interface in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"interface\", \"correct\": true },\r\n        { \"text\": \"class\", \"correct\": false },\r\n        { \"text\": \"implements\", \"correct\": false },\r\n        { \"text\": \"extends\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"What does JVM stand for?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Java Virtual Machine\", \"correct\": true },\r\n        { \"text\": \"Java Visual Machine\", \"correct\": false },\r\n        { \"text\": \"Java Variable Machine\", \"correct\": false },\r\n        { \"text\": \"Java Version Manager\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which method is automatically called when an object is created?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Constructor\", \"correct\": true },\r\n        { \"text\": \"main()\", \"correct\": false },\r\n        { \"text\": \"init()\", \"correct\": false },\r\n        { \"text\": \"start()\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which symbol is used to inherit a class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"extends\", \"correct\": true },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"instanceof\", \"correct\": false },\r\n        { \"text\": \"==\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used for exception handling in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"try\", \"correct\": true },\r\n        { \"text\": \"catch\", \"correct\": false },\r\n        { \"text\": \"throw\", \"correct\": false },\r\n        { \"text\": \"final\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of the following is not a Java feature?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Multiple inheritance using classes\", \"correct\": true },\r\n        { \"text\": \"Object Oriented\", \"correct\": false },\r\n        { \"text\": \"Platform Independent\", \"correct\": false },\r\n        { \"text\": \"Robust\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which method must be implemented by a Java thread?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"run()\", \"correct\": true },\r\n        { \"text\": \"start()\", \"correct\": false },\r\n        { \"text\": \"init()\", \"correct\": false },\r\n        { \"text\": \"main()\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these keywords is used to inherit interfaces?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"implements\", \"correct\": true },\r\n        { \"text\": \"extends\", \"correct\": false },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"override\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which operator is used for logical AND in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"&&\", \"correct\": true },\r\n        { \"text\": \"&\", \"correct\": false },\r\n        { \"text\": \"|\", \"correct\": false },\r\n        { \"text\": \"||\", \"correct\": false }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/questions/bulk",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"questions",
+										"bulk"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/questions/bulk",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"questions\": [\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is not a primitive data type in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"String\", \"correct\": true },\r\n        { \"text\": \"int\", \"correct\": false },\r\n        { \"text\": \"boolean\", \"correct\": false },\r\n        { \"text\": \"char\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is used to allocate memory for an object?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"new\", \"correct\": true },\r\n        { \"text\": \"alloc\", \"correct\": false },\r\n        { \"text\": \"malloc\", \"correct\": false },\r\n        { \"text\": \"object\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to inherit a class in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"extends\", \"correct\": true },\r\n        { \"text\": \"implements\", \"correct\": false },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"super\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"What is the default value of a boolean variable in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"false\", \"correct\": true },\r\n        { \"text\": \"true\", \"correct\": false },\r\n        { \"text\": \"0\", \"correct\": false },\r\n        { \"text\": \"null\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which access modifier makes a member visible only within its own class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"private\", \"correct\": true },\r\n        { \"text\": \"protected\", \"correct\": false },\r\n        { \"text\": \"public\", \"correct\": false },\r\n        { \"text\": \"default\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which loop is guaranteed to execute at least once?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"do-while\", \"correct\": true },\r\n        { \"text\": \"while\", \"correct\": false },\r\n        { \"text\": \"for\", \"correct\": false },\r\n        { \"text\": \"foreach\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these is a valid keyword in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"interface\", \"correct\": true },\r\n        { \"text\": \"unsigned\", \"correct\": false },\r\n        { \"text\": \"typeof\", \"correct\": false },\r\n        { \"text\": \"def\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to define a constant variable?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"final\", \"correct\": true },\r\n        { \"text\": \"const\", \"correct\": false },\r\n        { \"text\": \"static\", \"correct\": false },\r\n        { \"text\": \"immutable\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which collection class allows you to access elements by key?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"HashMap\", \"correct\": true },\r\n        { \"text\": \"ArrayList\", \"correct\": false },\r\n        { \"text\": \"LinkedList\", \"correct\": false },\r\n        { \"text\": \"Vector\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which package contains the Scanner class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"java.util\", \"correct\": true },\r\n        { \"text\": \"java.io\", \"correct\": false },\r\n        { \"text\": \"java.net\", \"correct\": false },\r\n        { \"text\": \"java.lang\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which exception is thrown when a program divides by zero?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"ArithmeticException\", \"correct\": true },\r\n        { \"text\": \"NullPointerException\", \"correct\": false },\r\n        { \"text\": \"ClassCastException\", \"correct\": false },\r\n        { \"text\": \"IOException\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used to create an interface in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"interface\", \"correct\": true },\r\n        { \"text\": \"class\", \"correct\": false },\r\n        { \"text\": \"implements\", \"correct\": false },\r\n        { \"text\": \"extends\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"What does JVM stand for?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Java Virtual Machine\", \"correct\": true },\r\n        { \"text\": \"Java Visual Machine\", \"correct\": false },\r\n        { \"text\": \"Java Variable Machine\", \"correct\": false },\r\n        { \"text\": \"Java Version Manager\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which method is automatically called when an object is created?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Constructor\", \"correct\": true },\r\n        { \"text\": \"main()\", \"correct\": false },\r\n        { \"text\": \"init()\", \"correct\": false },\r\n        { \"text\": \"start()\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which symbol is used to inherit a class?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"extends\", \"correct\": true },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"instanceof\", \"correct\": false },\r\n        { \"text\": \"==\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which keyword is used for exception handling in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"try\", \"correct\": true },\r\n        { \"text\": \"catch\", \"correct\": false },\r\n        { \"text\": \"throw\", \"correct\": false },\r\n        { \"text\": \"final\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of the following is not a Java feature?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"Multiple inheritance using classes\", \"correct\": true },\r\n        { \"text\": \"Object Oriented\", \"correct\": false },\r\n        { \"text\": \"Platform Independent\", \"correct\": false },\r\n        { \"text\": \"Robust\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which method must be implemented by a Java thread?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"run()\", \"correct\": true },\r\n        { \"text\": \"start()\", \"correct\": false },\r\n        { \"text\": \"init()\", \"correct\": false },\r\n        { \"text\": \"main()\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which of these keywords is used to inherit interfaces?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"implements\", \"correct\": true },\r\n        { \"text\": \"extends\", \"correct\": false },\r\n        { \"text\": \"inherits\", \"correct\": false },\r\n        { \"text\": \"override\", \"correct\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"userId\": 1,\r\n      \"questionText\": \"Which operator is used for logical AND in Java?\",\r\n      \"topicId\": 1,\r\n      \"options\": [\r\n        { \"text\": \"&&\", \"correct\": true },\r\n        { \"text\": \"&\", \"correct\": false },\r\n        { \"text\": \"|\", \"correct\": false },\r\n        { \"text\": \"||\", \"correct\": false }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/questions/bulk",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"questions",
+												"bulk"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 14 May 2025 10:38:52 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "All questions successfully uploaded"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "exam",
+					"item": [
+						{
+							"name": "localhost:8080/exams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzIzMjIsImV4cCI6MTc0NzE3MzIyMn0.BQTp1XyMJBIPwNJ1IkM1ksQTjek-EDYIjDHInYB1_JQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"topicId\": 1,\r\n  \"noOfQuestion\": 10,\r\n  \"userId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/exams",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"topicId\": 1,\r\n  \"noOfQuestion\": 10,\r\n  \"userId\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/exams",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 21:50:09 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 2,\n    \"noOfQuestion\": 10,\n    \"topicName\": \"java\",\n    \"createdBy\": 1,\n    \"createdDate\": \"2025-05-14\"\n}"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIxMDM5OSwiZXhwIjoxNzQ3MjExMjk5fQ.f7MKOE5dtsX7s--ofwgcx6m4kpig8Gwe9QqcHHHve2M",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/exams",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 21:53:01 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"noOfQuestion\": 10,\n        \"topicName\": \"java\",\n        \"createdBy\": 1,\n        \"createdDate\": \"2025-05-13\"\n    },\n    {\n        \"id\": 2,\n        \"noOfQuestion\": 10,\n        \"topicName\": \"java\",\n        \"createdBy\": 1,\n        \"createdDate\": \"2025-05-14\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams/2/1/start",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzMzNjEsImV4cCI6MTc0NzE3NDI2MX0.8s4ljndL8Vt5xlWbW-MUUDRm6E4TjfYCbZa7mecY-6Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/exams/2/1/start",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams",
+										"2",
+										"1",
+										"start"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams/2/1/start",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams/2/1/start",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"1",
+												"start"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 21:56:34 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userExamId\": 2,\n    \"topic\": \"java\",\n    \"questions\": [\n        {\n            \"options\": [\n                \".class\",\n                \".jar\",\n                \".java\",\n                \".exe\"\n            ],\n            \"quesId\": 47,\n            \"quesText\": \"What is the extension of compiled Java files?\"\n        },\n        {\n            \"options\": [\n                \"foreach\",\n                \"while\",\n                \"do-while\",\n                \"for\"\n            ],\n            \"quesId\": 39,\n            \"quesText\": \"Which loop always executes at least once?\"\n        },\n        {\n            \"options\": [\n                \"4 bytes\",\n                \"2 bytes\",\n                \"Depends on system\",\n                \"8 bytes\"\n            ],\n            \"quesId\": 34,\n            \"quesText\": \"What is the size of an int in Java?\"\n        },\n        {\n            \"options\": [\n                \"implements\",\n                \"import\",\n                \"extends\",\n                \"super\"\n            ],\n            \"quesId\": 33,\n            \"quesText\": \"Which keyword is used to inherit a class in Java?\"\n        },\n        {\n            \"options\": [\n                \"new\",\n                \"create\",\n                \"object\",\n                \"class\"\n            ],\n            \"quesId\": 44,\n            \"quesText\": \"Which keyword creates an object in Java?\"\n        },\n        {\n            \"options\": [\n                \"A bird\",\n                \"A programming language\",\n                \"A fruit\",\n                \"A car\"\n            ],\n            \"quesId\": 6,\n            \"quesText\": \"What is Java?\"\n        },\n        {\n            \"options\": [\n                \"A game\",\n                \"A Java Virtual Machine\",\n                \"A database\",\n                \"A browser\"\n            ],\n            \"quesId\": 32,\n            \"quesText\": \"What is JVM?\"\n        },\n        {\n            \"options\": [\n                \"java.io\",\n                \"java.text\",\n                \"java.lang\",\n                \"java.util\"\n            ],\n            \"quesId\": 46,\n            \"quesText\": \"Which package contains Scanner class?\"\n        },\n        {\n            \"options\": [\n                \"Set\",\n                \"List\",\n                \"Map\",\n                \"ArrayList\"\n            ],\n            \"quesId\": 29,\n            \"quesText\": \"Which class is used to associate key and value?\"\n        },\n        {\n            \"options\": [\n                \"5+5\",\n                \"error\",\n                \"55\",\n                \"10\"\n            ],\n            \"quesId\": 30,\n            \"quesText\": \"What will be the result of 5 + \\\"\\\"5\\\"\\\"?\"\n        }\n    ]\n}"
+								},
+								{
+									"name": "localhost:8080/exams/2/1/start",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams/2/1/start",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"1",
+												"start"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 14 May 2025 08:45:26 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userExamId\": 2,\n    \"topic\": \"java\",\n    \"questions\": [\n        {\n            \"options\": [\n                \"run()\",\n                \"main()\",\n                \"start()\",\n                \"init()\"\n            ],\n            \"quesText\": \"Which method is the entry point in a Java application?\",\n            \"quesId\": 6\n        },\n        {\n            \"options\": [\n                \"!=\",\n                \"&&\",\n                \"=\",\n                \"==\"\n            ],\n            \"quesText\": \"Which operator is used to compare two values?\",\n            \"quesId\": 11\n        },\n        {\n            \"options\": [\n                \"/*\",\n                \"#\",\n                \"<!--\",\n                \"//\"\n            ],\n            \"quesText\": \"Which symbol is used for single-line comments?\",\n            \"quesId\": 15\n        },\n        {\n            \"options\": [\n                \"object\",\n                \"create\",\n                \"class\",\n                \"new\"\n            ],\n            \"quesText\": \"Which keyword creates an object in Java?\",\n            \"quesId\": 14\n        },\n        {\n            \"options\": [\n                \"A browser\",\n                \"A game\",\n                \"A Java Virtual Machine\",\n                \"A database\"\n            ],\n            \"quesText\": \"What is JVM?\",\n            \"quesId\": 2\n        },\n        {\n            \"options\": [\n                \"word\",\n                \"text\",\n                \"char\",\n                \"String\"\n            ],\n            \"quesText\": \"Which data type is used to store text?\",\n            \"quesId\": 13\n        },\n        {\n            \"options\": [\n                \"Same method name with different parameters\",\n                \"Different method names\",\n                \"Only one method allowed\",\n                \"Same name and same parameters\"\n            ],\n            \"quesText\": \"What is method overloading?\",\n            \"quesId\": 10\n        },\n        {\n            \"options\": [\n                \"java.io\",\n                \"java.util\",\n                \"java.text\",\n                \"java.lang\"\n            ],\n            \"quesText\": \"Which package contains Scanner class?\",\n            \"quesId\": 16\n        },\n        {\n            \"options\": [\n                \"8 bytes\",\n                \"4 bytes\",\n                \"2 bytes\",\n                \"Depends on system\"\n            ],\n            \"quesText\": \"What is the size of an int in Java?\",\n            \"quesId\": 4\n        },\n        {\n            \"options\": [\n                \"string\",\n                \"Text\",\n                \"String\",\n                \"txt\"\n            ],\n            \"quesText\": \"Which data type is used to create a variable that should store text?\",\n            \"quesId\": 28\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams/2/review",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzMzNjEsImV4cCI6MTc0NzE3NDI2MX0.8s4ljndL8Vt5xlWbW-MUUDRm6E4TjfYCbZa7mecY-6Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"A programming language\",\r\n    \"32\": \"A Java Virtual Machine\",\r\n    \"29\": \"Map\",\r\n    \"33\": \"extends\",\r\n    \"44\": \"new\",\r\n    \"30\": \"55\",\r\n    \"34\": \"4 bytes\",\r\n    \"46\": \"java.util\",\r\n    \"47\": \".class\",\r\n    \"39\": \"do-while\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/exams/2/review",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams",
+										"2",
+										"review"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams/2/review",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"A programming language\",\r\n    \"32\": \"A Java Virtual Machine\",\r\n    \"29\": \"Map\",\r\n    \"33\": \"extends\",\r\n    \"44\": \"new\",\r\n    \"30\": \"55\",\r\n    \"34\": \"4 bytes\",\r\n    \"46\": \"java.util\",\r\n    \"47\": \".class\",\r\n    \"39\": \"do-while\"\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/exams/2/review",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"review"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 22:02:03 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"examId\": 1,\n    \"topic\": \"java\",\n    \"totalQuestions\": 10,\n    \"attemptedQuestions\": 10,\n    \"reviewAnsList\": [\n        {\n            \"question\": \"What is Java?\",\n            \"submittedAns\": \"A programming language\"\n        },\n        {\n            \"question\": \"Which class is used to associate key and value?\",\n            \"submittedAns\": \"Map\"\n        },\n        {\n            \"question\": \"What will be the result of 5 + \\\"\\\"5\\\"\\\"?\",\n            \"submittedAns\": \"55\"\n        },\n        {\n            \"question\": \"What is JVM?\",\n            \"submittedAns\": \"A Java Virtual Machine\"\n        },\n        {\n            \"question\": \"Which keyword is used to inherit a class in Java?\",\n            \"submittedAns\": \"extends\"\n        },\n        {\n            \"question\": \"What is the size of an int in Java?\",\n            \"submittedAns\": \"4 bytes\"\n        },\n        {\n            \"question\": \"Which loop always executes at least once?\",\n            \"submittedAns\": \"do-while\"\n        },\n        {\n            \"question\": \"Which keyword creates an object in Java?\",\n            \"submittedAns\": \"new\"\n        },\n        {\n            \"question\": \"Which package contains Scanner class?\",\n            \"submittedAns\": \"java.util\"\n        },\n        {\n            \"question\": \"What is the extension of compiled Java files?\",\n            \"submittedAns\": \".class\"\n        }\n    ]\n}"
+								},
+								{
+									"name": "localhost:8080/exams/2/review",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"main()\",\r\n    \"11\": \"==\",\r\n    \"15\": \"//\",\r\n    \"14\": \"new\",\r\n    \"2\": \"A Java Virtual Machine\",\r\n    \"13\": \"String\",\r\n    \"10\": \"Same method name with different parameters\",\r\n    \"16\": \"java.util\",\r\n    \"4\": \"4 bytes\",\r\n    \"28\": \"String\"\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/exams/2/review",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"review"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 14 May 2025 08:48:59 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"examId\": 1,\n    \"topic\": \"java\",\n    \"totalQuestions\": 10,\n    \"attemptedQuestions\": 10,\n    \"reviewAnsList\": [\n        {\n            \"question\": \"What is JVM?\",\n            \"submittedAns\": \"A Java Virtual Machine\"\n        },\n        {\n            \"question\": \"What is the size of an int in Java?\",\n            \"submittedAns\": \"4 bytes\"\n        },\n        {\n            \"question\": \"Which method is the entry point in a Java application?\",\n            \"submittedAns\": \"main()\"\n        },\n        {\n            \"question\": \"What is method overloading?\",\n            \"submittedAns\": \"Same method name with different parameters\"\n        },\n        {\n            \"question\": \"Which operator is used to compare two values?\",\n            \"submittedAns\": \"==\"\n        },\n        {\n            \"question\": \"Which data type is used to store text?\",\n            \"submittedAns\": \"String\"\n        },\n        {\n            \"question\": \"Which keyword creates an object in Java?\",\n            \"submittedAns\": \"new\"\n        },\n        {\n            \"question\": \"Which symbol is used for single-line comments?\",\n            \"submittedAns\": \"//\"\n        },\n        {\n            \"question\": \"Which package contains Scanner class?\",\n            \"submittedAns\": \"java.util\"\n        },\n        {\n            \"question\": \"Which data type is used to create a variable that should store text?\",\n            \"submittedAns\": \"String\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams/2/submit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzMzNjEsImV4cCI6MTc0NzE3NDI2MX0.8s4ljndL8Vt5xlWbW-MUUDRm6E4TjfYCbZa7mecY-6Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"A programming language\",\r\n    \"32\": \"A Java Virtual Machine\",\r\n    \"29\": \"Map\",\r\n    \"33\": \"extends\",\r\n    \"44\": \"new\",\r\n    \"30\": \"55\",\r\n    \"34\": \"4 bytes\",\r\n    \"46\": \"java.util\",\r\n    \"47\": \".class\",\r\n    \"39\": \"do-while\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/exams/2/submit",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams",
+										"2",
+										"submit"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams/2/submit",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"A programming language\",\r\n    \"32\": \"A Java Virtual Machine\",\r\n    \"29\": \"Map\",\r\n    \"33\": \"extends\",\r\n    \"44\": \"new\",\r\n    \"30\": \"55\",\r\n    \"34\": \"4 bytes\",\r\n    \"46\": \"java.util\",\r\n    \"47\": \".class\",\r\n    \"39\": \"do-while\"\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/exams/2/submit",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"submit"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 22:03:40 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Exam submitted successfully\",\n    \"noOfQuestions\": 10,\n    \"correctAns\": 10,\n    \"score\": 10\n}"
+								},
+								{
+									"name": "localhost:8080/exams/2/submit",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"answers\": {\r\n    \"6\": \"main()\",\r\n    \"11\": \"==\",\r\n    \"15\": \"//\",\r\n    \"14\": \"new\",\r\n    \"2\": \"A Java Virtual Machine\",\r\n    \"13\": \"String\",\r\n    \"10\": \"Same method name with different parameters\",\r\n    \"16\": \"java.util\",\r\n    \"4\": \"4 bytes\",\r\n    \"28\": \"String\"\r\n  }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/exams/2/submit",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"submit"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 14 May 2025 08:50:16 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Exam submitted successfully\",\n    \"noOfQuestions\": 10,\n    \"correctAns\": 10,\n    \"score\": 10\n}"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams/2/result",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzMzNjEsImV4cCI6MTc0NzE3NDI2MX0.8s4ljndL8Vt5xlWbW-MUUDRm6E4TjfYCbZa7mecY-6Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/exams/2/result",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams",
+										"2",
+										"result"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams/2/result",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams/2/result",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"result"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 22:06:11 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"topic\": \"java\",\n    \"totalQuestion\": 10,\n    \"totalCorrect\": 10,\n    \"score\": 10,\n    \"body\": [\n        {\n            \"question\": \"What is Java?\",\n            \"submittedAns\": \"A programming language\",\n            \"correctAns\": \"A programming language\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which class is used to associate key and value?\",\n            \"submittedAns\": \"Map\",\n            \"correctAns\": \"Map\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What will be the result of 5 + \\\"\\\"5\\\"\\\"?\",\n            \"submittedAns\": \"55\",\n            \"correctAns\": \"55\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What is JVM?\",\n            \"submittedAns\": \"A Java Virtual Machine\",\n            \"correctAns\": \"A Java Virtual Machine\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which keyword is used to inherit a class in Java?\",\n            \"submittedAns\": \"extends\",\n            \"correctAns\": \"extends\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What is the size of an int in Java?\",\n            \"submittedAns\": \"4 bytes\",\n            \"correctAns\": \"4 bytes\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which loop always executes at least once?\",\n            \"submittedAns\": \"do-while\",\n            \"correctAns\": \"do-while\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which keyword creates an object in Java?\",\n            \"submittedAns\": \"new\",\n            \"correctAns\": \"new\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which package contains Scanner class?\",\n            \"submittedAns\": \"java.util\",\n            \"correctAns\": \"java.util\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What is the extension of compiled Java files?\",\n            \"submittedAns\": \".class\",\n            \"correctAns\": \".class\",\n            \"status\": \"Correct\"\n        }\n    ]\n}"
+								},
+								{
+									"name": "localhost:8080/exams/2/result",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams/2/result",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"result"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 14 May 2025 08:50:33 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"topic\": \"java\",\n    \"totalQuestion\": 10,\n    \"totalCorrect\": 10,\n    \"score\": 10,\n    \"body\": [\n        {\n            \"question\": \"What is JVM?\",\n            \"submittedAns\": \"A Java Virtual Machine\",\n            \"correctAns\": \"A Java Virtual Machine\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What is the size of an int in Java?\",\n            \"submittedAns\": \"4 bytes\",\n            \"correctAns\": \"4 bytes\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which method is the entry point in a Java application?\",\n            \"submittedAns\": \"main()\",\n            \"correctAns\": \"main()\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"What is method overloading?\",\n            \"submittedAns\": \"Same method name with different parameters\",\n            \"correctAns\": \"Same method name with different parameters\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which operator is used to compare two values?\",\n            \"submittedAns\": \"==\",\n            \"correctAns\": \"==\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which data type is used to store text?\",\n            \"submittedAns\": \"String\",\n            \"correctAns\": \"String\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which keyword creates an object in Java?\",\n            \"submittedAns\": \"new\",\n            \"correctAns\": \"new\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which symbol is used for single-line comments?\",\n            \"submittedAns\": \"//\",\n            \"correctAns\": \"//\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which package contains Scanner class?\",\n            \"submittedAns\": \"java.util\",\n            \"correctAns\": \"java.util\",\n            \"status\": \"Correct\"\n        },\n        {\n            \"question\": \"Which data type is used to create a variable that should store text?\",\n            \"submittedAns\": \"String\",\n            \"correctAns\": \"String\",\n            \"status\": \"Correct\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "localhost:8080/exams/2/past-exams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWl0LnZlcm1hIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDcxNzMzNjEsImV4cCI6MTc0NzE3NDI2MX0.8s4ljndL8Vt5xlWbW-MUUDRm6E4TjfYCbZa7mecY-6Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/exams/2/past-exams",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"exams",
+										"2",
+										"past-exams"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "localhost:8080/exams/2/past-exams",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/exams/2/past-exams",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"exams",
+												"2",
+												"past-exams"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 13 May 2025 22:08:04 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"userExamId\": 2,\n        \"topic\": \"java\",\n        \"totalQues\": 10,\n        \"correctAns\": 10,\n        \"score\": 10\n    }\n]"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "auth-service",
+			"item": [
+				{
+					"name": "localhost:8083/auth/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 500', function () {",
+									"    pm.expect(pm.response.code).to.equal(500);",
+									"})",
+									"",
+									"pm.test('Response has the required fields', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.timestamp).to.exist;",
+									"    pm.expect(responseData.status).to.exist;",
+									"    pm.expect(responseData.error).to.exist;",
+									"    pm.expect(responseData.message).to.exist;",
+									"    pm.expect(responseData.path).to.exist;",
+									"})",
+									"",
+									"pm.test('Error message is not empty', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.error).to.exist.and.to.not.be.empty;",
+									"})",
+									"",
+									"pm.test('Path is a non-empty string', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.path).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"username\": \"virat\",\r\n  \"password\": \"virat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8083/auth/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n  \"username\": \"virat\",\r\n  \"password\": \"virat\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 07:55:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3MjEwMjM4fQ.ken4ZlxGnx_o2wuAtLh4Lx-TPb6fxWwqQK8TnbbjX_4\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3ODE0MTM4fQ.u5CoEpsPntdRd_-YjsPIrZJgFB6TEVpI4xSVNxh17t8\"\n}"
+						}
+					]
+				},
+				{
+					"name": "localhost:8080/auth/refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields - accessToken and refreshToken\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.accessToken).to.exist;",
+									"    pm.expect(responseData.refreshToken).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"AccessToken and refreshToken are non-empty strings\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.accessToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"AccessToken should not be empty\");",
+									"    pm.expect(responseData.refreshToken).to.be.a('string').and.to.have.lengthOf.at.least(1, \"RefreshToken should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Content-Type header is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Access token and refresh token are in valid format\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.accessToken).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+									"    pm.expect(responseData.refreshToken).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3ODE0MTM4fQ.u5CoEpsPntdRd_-YjsPIrZJgFB6TEVpI4xSVNxh17t8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/refresh",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "localhost:8080/auth/refresh",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3ODE0MTM4fQ.u5CoEpsPntdRd_-YjsPIrZJgFB6TEVpI4xSVNxh17t8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/auth/refresh",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 May 2025 08:13:19 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0NzIxMDM5OSwiZXhwIjoxNzQ3MjExMjk5fQ.f7MKOE5dtsX7s--ofwgcx6m4kpig8Gwe9QqcHHHve2M\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2aXJhdCIsImlhdCI6MTc0NzIwOTMzOCwiZXhwIjoxNzQ3ODE0MTM4fQ.u5CoEpsPntdRd_-YjsPIrZJgFB6TEVpI4xSVNxh17t8\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

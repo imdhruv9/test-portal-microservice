@@ -51,6 +51,12 @@ public class UserController {
         UserResponseDto savedUser = userService.registerUser(userRequestDto);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+    @GetMapping("/by-username")
+    public ResponseEntity<CredResponseDto> getUserByUsername(@RequestParam String username){
+        CredResponseDto credential = userService.getUserByUsername(username);
+        return new ResponseEntity<>(credential,HttpStatus.CREATED);
+
+    }
 
 }
 
